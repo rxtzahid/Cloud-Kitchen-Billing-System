@@ -1,32 +1,298 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; background: #F7FAFC; color: #2D3748; padding: 20px; }
+/* Light Mode (Default) */
+body {
+  background-color: #f8f9fa;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px;
+  margin: 0;
+  transition: all 0.3s ease;
+  min-height: 100vh;
+}
 
-.App { max-width: 1200px; margin: 0 auto; }
+/* Header */
+header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
 
-header { background: linear-gradient(135deg, #2A4365, #4FD1C5); color: white; padding: 25px; border-radius: 12px; margin-bottom: 30px; }
-header h1 { font-size: 28px; }
-header p { opacity: 0.9; }
+/* Stats Cards */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin: 30px 0;
+}
 
-.stats-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; margin-bottom: 30px; }
-.card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08); transition: transform 0.3s; }
-.card:hover { transform: translateY(-5px); }
-.card h3 { font-size: 16px; color: #718096; margin-bottom: 10px; }
-.card .count { font-size: 36px; font-weight: 700; color: #2A4365; }
-.card .amount { font-size: 28px; font-weight: 700; color: #38A169; }
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: 1px solid #e9ecef;
+}
 
-table { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.05); width: 100%; margin-top: 20px; }
-th { background: #4FD1C5; color: white; padding: 16px; text-align: left; }
-td { padding: 16px; border-bottom: 1px solid #E2E8F0; }
-tr:hover { background: #F7FAFC; }
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
 
-.btn { padding: 8px 16px; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; margin: 2px; font-size: 14px; }
-.btn-invoice { background: #38A169; color: white; }
-.btn-details { background: #3182CE; color: white; }
-.btn-edit { background: #ED8936; color: white; }
-.btn-delete { background: #E53E3E; color: white; }
-.btn-print { background: #4FD1C5; color: white; }
+.card h3 {
+  color: #6c757d;
+  font-size: 16px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
 
-footer { text-align: center; margin-top: 40px; color: #718096; font-size: 14px; }
+.count {
+  font-size: 36px;
+  font-weight: bold;
+  color: #0d6efd;
+  margin: 0;
+}
 
-.action-buttons { margin: 20px 0; }
-.table-footer { margin-top: 15px; font-weight: bold; }
+.amount {
+  font-size: 32px;
+  font-weight: bold;
+  color: #198754;
+  margin: 0;
+}
+
+/* Action Buttons */
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 150px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-print {
+  background: linear-gradient(135deg, #9C27B0 0%, #673AB7 100%);
+  color: white;
+}
+
+.btn-invoice {
+  background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+  color: white;
+}
+
+.btn-delete {
+  background: linear-gradient(135deg, #f44336 0%, #c62828 100%);
+  color: white;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+table th {
+  background: #2c3e50;
+  color: white;
+  padding: 18px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+table td {
+  padding: 15px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}
+
+table tr:hover {
+  background-color: #f8f9fa;
+}
+
+/* Table Footer */
+.table-footer {
+  text-align: right;
+  padding: 15px;
+  color: #6c757d;
+  font-size: 16px;
+}
+
+.table-footer strong {
+  color: #198754;
+}
+
+/* Footer */
+footer {
+  margin-top: 50px;
+  padding: 25px;
+  text-align: center;
+  background: #f8f9fa;
+  border-radius: 15px;
+  color: #6c757d;
+  border-top: 3px solid #0d6efd;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+/* ========== DARK MODE STYLES ========== */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* Dark Mode Header */
+body.dark-mode header {
+  background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
+}
+
+/* Dark Mode Cards */
+body.dark-mode .card {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+}
+
+body.dark-mode .card h3 {
+  color: #b0b0b0;
+}
+
+body.dark-mode .count {
+  color: #64b5f6;
+}
+
+body.dark-mode .amount {
+  color: #81c784;
+}
+
+/* Dark Mode Table */
+body.dark-mode table {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+body.dark-mode table thead {
+  background-color: #0d47a1;
+}
+
+body.dark-mode table th {
+  background-color: #0d47a1;
+}
+
+body.dark-mode table td {
+  border-bottom: 1px solid #333;
+}
+
+body.dark-mode table tr:hover {
+  background-color: #2a2a2a;
+}
+
+/* Dark Mode Buttons */
+body.dark-mode .btn {
+  background: #333;
+  color: #fff;
+  border: 1px solid #444;
+}
+
+body.dark-mode .btn:hover {
+  background: #444;
+}
+
+body.dark-mode .btn-print {
+  background: linear-gradient(135deg, #7b1fa2 0%, #512da8 100%);
+}
+
+body.dark-mode .btn-invoice {
+  background: linear-gradient(135deg, #388e3c 0%, #1b5e20 100%);
+}
+
+body.dark-mode .btn-delete {
+  background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+}
+
+/* Dark Mode Footer */
+body.dark-mode footer {
+  background-color: #1e1e1e;
+  color: #b0b0b0;
+  border-top: 3px solid #1976d2;
+}
+
+body.dark-mode .table-footer {
+  color: #b0b0b0;
+}
+
+body.dark-mode .table-footer strong {
+  color: #81c784;
+}
+
+/* Dark Mode Action Buttons */
+body.dark-mode .action-buttons .btn {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark Mode Table Row Hover */
+body.dark-mode table tr:hover {
+  background-color: #2d2d2d;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  header {
+    padding: 20px;
+  }
+  
+  header h1 {
+    font-size: 22px;
+  }
+}

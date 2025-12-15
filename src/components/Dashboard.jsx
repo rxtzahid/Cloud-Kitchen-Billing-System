@@ -1,17 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBill, deleteBill, updateBill, resetBills } from '../app/store';
 
 const Dashboard = () => {
   const bills = useSelector((state) => state.bills.items);
   const dispatch = useDispatch();
+  
+  const [darkMode, setDarkMode] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return savedTheme === 'dark' || false;
+  });
 
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    localStorage.setItem('theme', newDarkMode ? 'dark' : 'light');
+    
+    if (newDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+  };
 
+  
   useEffect(() => {
+    if (darkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+    
     localStorage.setItem('cloudKitchenBills', JSON.stringify(bills));
-  }, [bills]);
+  }, [darkMode, bills]);
 
-
+  
   const corporateTotal = bills
     .filter(bill => bill.type === 'corporate')
     .reduce((sum, bill) => sum + bill.total, 0);
@@ -24,7 +47,6 @@ const Dashboard = () => {
   const eventBills = bills.filter(bill => bill.type === 'event');
   const eventBillsTotal = eventBills.reduce((sum, bill) => sum + bill.total, 0);
 
-  
   const handleCreateNewBill = () => {
     const billType = window.confirm('Is this an Event bill? (OK for Event, Cancel for Corporate)') 
       ? 'event' 
@@ -58,7 +80,7 @@ const Dashboard = () => {
     alert(`Bill created!\nID: ${newId}\nType: ${billType}\nAmount: BDT ${total}`);
   };
 
-  
+
   const handleEditBill = (id) => {
     const bill = bills.find(b => b.id === id);
     if (!bill) return;
@@ -70,7 +92,7 @@ const Dashboard = () => {
     }
   };
 
-  
+
   const handleDeleteBill = (id) => {
     if (window.confirm('Delete this bill?')) {
       dispatch(deleteBill(id));
@@ -78,7 +100,7 @@ const Dashboard = () => {
     }
   };
 
-
+  
   const handleResetAll = () => {
     if (window.confirm('Delete ALL bills?')) {
       dispatch(resetBills());
@@ -89,8 +111,54 @@ const Dashboard = () => {
   return (
     <>
       <header>
-        <h1><i className="fas fa-cloud"></i> Cloud Kitchen Billing System</h1>
-        <p>Admin Dashboard</p>
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'space-between', 
+          alignItems: 'center',
+          flexWrap: 'wrap' 
+        }}>
+          <div>
+            <h1 style={{ 
+              margin: 0, 
+              fontSize: '28px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '10px'
+            }}>
+              <i className="fas fa-cloud" style={{ color: '#4FC3F7' }}></i> 
+              Cloud Kitchen Billing System
+            </h1>
+            <p style={{ margin: '5px 0 0 0', opacity: 0.9 }}>Admin Dashboard</p>
+          </div>
+          
+          {/* Dark Mode Toggle Button */}
+          <button
+            onClick={toggleDarkMode}
+            style={{
+              background: darkMode ? '#333' : '#f0f0f0',
+              color: darkMode ? '#fff' : '#333',
+              border: 'none',
+              borderRadius: '50%',
+              width: '50px',
+              height: '50px',
+              fontSize: '20px',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'all 0.3s',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+              marginLeft: '20px'
+            }}
+            title={darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
+          >
+            {darkMode ? (
+              <i className="fas fa-sun" style={{ color: '#FFD700' }}></i>
+            ) : (
+              <i className="fas fa-moon"></i>
+            )}
+          </button>
+        </div>
       </header>
 
       <div className="stats-cards">
