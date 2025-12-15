@@ -1,0 +1,76 @@
+/* 3-dot মেনু স্টাইল */
+.action-cell {
+  display: flex;
+  gap: 8px;
+  position: relative;
+}
+
+.three-dots-wrapper {
+  position: relative;
+}
+
+.dots-btn {
+  background: #f0f0f0;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+.dots-btn:hover {
+  background: #e0e0e0;
+}
+
+.three-dots-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  min-width: 200px;
+  z-index: 100;
+  overflow: hidden;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.menu-item:hover {
+  background: #f5f5f5;
+}
+
+.menu-item:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.menu-item i {
+  width: 20px;
+  color: #666;
+}
+
+/* রেসপন্সিভ টেবিল */
+@media (max-width: 768px) {
+  .action-cell {
+    flex-wrap: wrap;
+  }
+  
+  .three-dots-wrapper {
+    margin-left: auto;
+  }
+}
